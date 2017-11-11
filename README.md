@@ -11,5 +11,5 @@ this is guideline for build and run PVMobileRecorder app from scratch.
   
 ## How to build and run
 
-  Install the XCode 9.0.
-  Open the PVMobileRecorder.xcodeproj from XCode.
+  - Install the XCode 9.0.
+  - Open the PVMobileRecorder.xcodeproj from XCode.
