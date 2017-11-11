@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  Siri
+//  PVMobileRecorder
 //
-//  Created by Sahand Edrisian on 7/14/16.
-//  Copyright © 2016 Sahand Edrisian. All rights reserved.
+//  Created by Ma Huateng on 11/6/17.
+//  Copyright © 2017 Ma Huateng. All rights reserved.
 //
 
 import UIKit
