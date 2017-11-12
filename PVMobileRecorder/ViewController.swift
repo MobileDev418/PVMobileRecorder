@@ -118,6 +118,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
                 audioPlayer?.prepareToPlay()
                 audioPlayer?.volume = 80
                 audioPlayer?.play()
+                
+                recognizeFile(url: (audioRecorder?.url)!)
             } catch let error as NSError {
                 print("audioPlayer error: \(error.localizedDescription)")
             }
@@ -173,18 +175,18 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
                 print("Result =====> %s", result?.bestTranscription.formattedString ?? "")
                 
                 self.playerButton.isHidden = false
-                
-                self.textView.text = result?.bestTranscription.formattedString
-                
-                let resultString = result?.bestTranscription.formattedString
-                
-                var lastString: String = ""
-                for wordnode in (result?.bestTranscription.segments)! {
-                    let indexTo = resultString?.index((resultString?.startIndex)!, offsetBy: wordnode.substringRange.location)
-                    lastString = (resultString?.substring(from: indexTo!))!
-                    
-                    print("Each Word detected from results =====> %s", lastString)
-                }
+//
+//                self.textView.text = result?.bestTranscription.formattedString
+//
+//                let resultString = result?.bestTranscription.formattedString
+//
+//                var lastString: String = ""
+//                for wordnode in (result?.bestTranscription.segments)! {
+//                    let indexTo = resultString?.index((resultString?.startIndex)!, offsetBy: wordnode.substringRange.location)
+//                    lastString = (resultString?.substring(from: indexTo!))!
+//
+//                    print("Each Word detected from results =====> %s", lastString)
+//                }
                 isFinal = (result?.isFinal)!
             }
             
@@ -223,6 +225,27 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
         } else {
             recorderButton.isEnabled = false
             playerButton.isEnabled = false
+        }
+    }
+    
+    func recognizeFile(url: URL) {
+        guard let recognizer = SFSpeechRecognizer(), recognizer.isAvailable else {
+            return
+        }
+        
+        let request = SFSpeechURLRecognitionRequest(url: url)
+        recognizer.recognitionTask(with: request) { result, error in
+            guard let recognizer = SFSpeechRecognizer(), recognizer.isAvailable else {
+                return
+            }
+            if let result = result {
+                self.textView.text = result.bestTranscription.formattedString
+//                if result.isFinal {
+//                    self.searchFlight(number: result.bestTranscription.formattedString)
+//                }
+            } else if let error = error {
+                print(error)
+            }
         }
     }
 }
