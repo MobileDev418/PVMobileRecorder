@@ -101,6 +101,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
         } else {
             startRecording()
             playerButton.isHidden = false
+            playerButton.isEnabled = false
             recorderButton.setImage(#imageLiteral(resourceName: "record-stop"), for: .normal)
         }
 	}
@@ -194,6 +195,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 
+                self.playerButton.isEnabled = true
                 self.recorderButton.isEnabled = true
             }
         })
@@ -211,14 +213,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
             print("audioEngine couldn't start because of an error.")
         }
         
-        textView.text = "Please recod your voice."
+        textView.text = "Please recode your voice."
     }
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             recorderButton.isEnabled = true
+            playerButton.isEnabled = true
         } else {
             recorderButton.isEnabled = false
+            playerButton.isEnabled = false
         }
     }
 }
