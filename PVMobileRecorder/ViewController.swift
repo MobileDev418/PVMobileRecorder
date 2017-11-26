@@ -119,7 +119,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
                 audioPlayer?.volume = 80
                 audioPlayer?.play()
                 
-                recognizeFile(url: (audioRecorder?.url)!)
+//                recognizeFile(url: (audioRecorder?.url)!)
             } catch let error as NSError {
                 print("audioPlayer error: \(error.localizedDescription)")
             }
@@ -175,8 +175,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
                 print("Result =====> %s", result?.bestTranscription.formattedString ?? "")
                 
                 self.playerButton.isHidden = false
-//
-//                self.textView.text = result?.bestTranscription.formattedString
+
+                self.textView.text = result?.bestTranscription.formattedString
 //
 //                let resultString = result?.bestTranscription.formattedString
 //
