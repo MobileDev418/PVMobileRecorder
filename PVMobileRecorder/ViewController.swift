@@ -240,9 +240,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, AVAudioPlaye
             }
             if let result = result {
                 self.textView.text = result.bestTranscription.formattedString
-//                if result.isFinal {
-//                    self.searchFlight(number: result.bestTranscription.formattedString)
-//                }
             } else if let error = error {
                 print(error)
             }
